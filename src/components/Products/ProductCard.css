@@ -1,0 +1,7 @@
+.product-card {
+	border: 1px solid black;
+}
+.product-card__image {
+	max-width: 100px;
+	max-height: auto;
+}

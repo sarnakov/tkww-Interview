@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './ProductCard.css';
 
 function ProductCard(props) {
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -6,10 +7,7 @@ function ProductCard(props) {
 	const { name, image, type, brandName, price, storeName } = props;
 
 	return (
-		<div
-			style={{ border: '1px solid black' }}
-			onClick={toggleExpandedStatus}
-		>
+		<div className="product-card" onClick={toggleExpandedStatus}>
 			{isExpanded && (
 				<div>
 					<p>Price: {price}</p>
@@ -17,11 +15,7 @@ function ProductCard(props) {
 				</div>
 			)}
 			<h2>{name}</h2>
-			<img
-				alt="alt"
-				src={image}
-				style={{ maxWidth: 100, maxHeight: 'auto' }}
-			></img>
+			<img alt="alt" src={image} className="product-card__image" />
 			<p>{type}</p>
 			<p>{brandName}</p>
 		</div>
