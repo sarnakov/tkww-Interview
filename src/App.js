@@ -11,7 +11,7 @@ function App() {
 		API.getProduct().then((res) => {
 			setProducts(res.data);
 		});
-	});
+	}, []);
 
 	const cardResults = [];
 
