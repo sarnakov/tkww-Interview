@@ -4,16 +4,20 @@ import ProductCard from './components/Products/ProductCard';
 import Jumbotron from './components/UI/Jumbotron';
 import Footer from './components/UI/Footer';
 
-function App() {
+const useLoadProducts = () => {
 	const [products, setProducts] = useState([]);
-	const [searchInput, setSearchInput] = useState('');
-	const [searchProduct, setProductInput] = useState('');
-
 	useEffect(() => {
 		API.getProduct().then((res) => {
 			setProducts(res.data);
 		});
 	}, []);
+	return products;
+};
+
+function App() {
+	const products = useLoadProducts();
+	const [searchInput, setSearchInput] = useState('');
+	const [searchProduct, setProductInput] = useState('');
 
 	const filteredProducts = products.filter((product) => {
 		// Refactored pushing components to array
