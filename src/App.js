@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import API from './api';
 import ProductCard from './components/Products/ProductCard';
 import Jumbotron from './components/UI/Jumbotron';
+import Footer from './components/UI/Footer';
 
 function App() {
 	const [products, setProducts] = useState([]);
@@ -45,11 +46,13 @@ function App() {
 					</label>
 				</form>
 			</div>
+
 			<label for="type">Choose a product type:</label>
 			<select onChange={(e) => setProductInput(e.target.value)}>
 				<option value="RETAIL">Retail</option>
 				<option value="CASH">Cash</option>
 			</select>
+
 			<div className="container">
 				<h1>Results: </h1>
 				<div>
@@ -58,13 +61,7 @@ function App() {
 					))}
 				</div>
 			</div>
-			<div style={{ marginTop: 30 }} className="footer">
-				{' '}
-				<div className="container">
-					<h1>Interview Footer </h1>
-				</div>
-				<p>Built with love</p>
-			</div>
+			<Footer />
 		</>
 	);
 }
