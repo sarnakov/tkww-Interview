@@ -48,7 +48,7 @@ function App() {
 
 			<div className="container">
 				<div>
-					<label for="search">Search:</label>
+					<label htmlFor="search">Search:</label>
 					<Input
 						type="text"
 						id="search"
@@ -58,7 +58,7 @@ function App() {
 				</div>
 
 				<div>
-					<label for="product-type">Choose a product type:</label>
+					<label htmlFor="product-type">Choose a product type:</label>
 					<Select
 						id="product-type"
 						value={productType}
