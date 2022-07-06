@@ -35,7 +35,7 @@ const useFilteredProducts = ({ products, searchInput, productType }) => {
 function App() {
 	const products = useLoadProducts();
 	const [searchInput, setSearchInput] = useState('');
-	const [productType, setProductType] = useState('');
+	const [productType, setProductType] = useState('RETAIL');
 	const filteredProducts = useFilteredProducts({
 		products,
 		searchInput,
@@ -63,7 +63,6 @@ function App() {
 						id="product-type"
 						value={productType}
 						options={[
-							{ key: '', value: 'All types' },
 							{ key: 'RETAIL', value: 'Retail' },
 							{ key: 'CASH', value: 'Cash' },
 						]}
@@ -78,6 +77,7 @@ function App() {
 					))}
 				</div>
 			</div>
+
 			<Footer />
 		</>
 	);
