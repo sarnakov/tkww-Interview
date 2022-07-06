@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import API from '../../api';
 import ProductsContext from './ProductsContext';
 
-const useLoadProducts = () => {
+const useLoadProducts = ({ onLoaded }) => {
 	const [products, setProducts] = useState([]);
 	useEffect(() => {
 		async function fetchData() {
 			try {
 				const res = await API.getProduct();
 				setProducts(res.data);
+				onLoaded(res.data);
 			} catch (err) {
 				console.error(err);
 			}
 		}
 		fetchData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return products;
 };
@@ -35,8 +37,8 @@ const getFilteredProducts = ({ products, searchValue, productType }) => {
 };
 
 function ProductsState({ children }) {
-	const products = useLoadProducts();
-	const [filteredProducts, setFilteredProducts] = useState(products);
+	const [filteredProducts, setFilteredProducts] = useState([]);
+	const products = useLoadProducts({ onLoaded: setFilteredProducts });
 	const filterProducts = ({ searchValue, productType }) => {
 		const filteredProducts = getFilteredProducts({
 			products,
