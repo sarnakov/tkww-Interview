@@ -16,17 +16,17 @@ const useLoadProducts = () => {
 	return products;
 };
 
-const useFilteredProducts = ({ products, searchInput, productType }) => {
+const useFilteredProducts = ({ products, searchValue, productType }) => {
 	return products.filter((product) => {
 		// Removed pushing components to array with purpose to filter products
 		// Fixed bug when filter by name and type simultaneously
-		if (!productType && !searchInput) return true;
+		if (!productType && !searchValue) return true;
 		const hasTypeMatch = productType && product.type.match(productType);
 
-		if (!searchInput && hasTypeMatch) return true;
+		if (!searchValue && hasTypeMatch) return true;
 
-		const searchInputRegExp = RegExp(searchInput, 'gi');
-		const isFoundByName = product.name.match(searchInputRegExp);
+		const searchValueRegExp = RegExp(searchValue, 'gi');
+		const isFoundByName = product.name.match(searchValueRegExp);
 		// I`would also recommend to use full-text search library to improve usability
 		return hasTypeMatch && isFoundByName;
 	});
@@ -34,11 +34,11 @@ const useFilteredProducts = ({ products, searchInput, productType }) => {
 
 function App() {
 	const products = useLoadProducts();
-	const [searchInput, setSearchInput] = useState('');
+	const [searchValue, setSearchValue] = useState('');
 	const [productType, setProductType] = useState('RETAIL');
 	const filteredProducts = useFilteredProducts({
 		products,
-		searchInput,
+		searchValue,
 		productType,
 	});
 
@@ -52,8 +52,8 @@ function App() {
 					<Input
 						type="text"
 						id="search"
-						value={searchInput}
-						onChange={setSearchInput}
+						value={searchValue}
+						onChange={setSearchValue}
 					/>
 				</div>
 
