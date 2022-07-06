@@ -4,6 +4,7 @@ import ProductCard from './components/Products/ProductCard';
 import Jumbotron from './components/UI/Jumbotron';
 import Footer from './components/UI/Footer';
 import Select from './components/UI/Select';
+import Input from './components/UI/Input';
 
 const useLoadProducts = () => {
 	const [products, setProducts] = useState([]);
@@ -46,31 +47,30 @@ function App() {
 			<Jumbotron title="Interview Header" />
 
 			<div className="container">
-				<form>
-					<label>
-						Search:
-						<input
-							type="text"
-							name="search"
-							value={searchInput}
-							onChange={(e) => setSearchInput(e.target.value)}
-						/>
-					</label>
-				</form>
-			</div>
+				<div>
+					<label for="search">Search:</label>
+					<Input
+						type="text"
+						id="search"
+						value={searchInput}
+						onChange={setSearchInput}
+					/>
+				</div>
 
-			<label for="type">Choose a product type:</label>
-			<Select
-				value={productType}
-				options={[
-					{ key: '', value: 'All types' },
-					{ key: 'RETAIL', value: 'Retail' },
-					{ key: 'CASH', value: 'Cash' },
-				]}
-				onChange={setProductType}
-			/>
+				<div>
+					<label for="product-type">Choose a product type:</label>
+					<Select
+						id="product-type"
+						value={productType}
+						options={[
+							{ key: '', value: 'All types' },
+							{ key: 'RETAIL', value: 'Retail' },
+							{ key: 'CASH', value: 'Cash' },
+						]}
+						onChange={setProductType}
+					/>
+				</div>
 
-			<div className="container">
 				<h1>Results: </h1>
 				<div>
 					{filteredProducts.map((product, idx) => (
