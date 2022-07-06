@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import API from './api';
 import ProductCard from './components/Products/ProductCard';
+import Jumbotron from './components/UI/Jumbotron';
 
 function App() {
 	const [products, setProducts] = useState([]);
@@ -29,11 +30,8 @@ function App() {
 
 	return (
 		<>
-			<div className="jumbotron jumbotron-fluid">
-				<div className="container">
-					<h1 className="text">Interview Header</h1>
-				</div>
-			</div>
+			<Jumbotron title="Interview Header" />
+
 			<div className="container">
 				<form>
 					<label>
