@@ -8,8 +8,8 @@ function ProductList() {
 		<>
 			<h2>Results: </h2>
 			<div>
-				{products.map((product, idx) => (
-					<ProductCard key={idx} {...product} />
+				{products.map((product) => (
+					<ProductCard key={product.id} {...product} />
 				))}
 			</div>
 		</>

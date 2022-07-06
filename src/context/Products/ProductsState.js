@@ -8,8 +8,12 @@ const useLoadProducts = ({ onLoaded }) => {
 		async function fetchData() {
 			try {
 				const res = await API.getProduct();
-				setProducts(res.data);
-				onLoaded(res.data);
+				const products = res.data.map((product, idx) => ({
+					...product,
+					id: idx,
+				}));
+				setProducts(products);
+				onLoaded(products);
 			} catch (err) {
 				console.error(err);
 			}
