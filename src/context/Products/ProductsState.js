@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import API from '../../api';
 import ProductsContext from './ProductsContext';
 
-const useLoadProducts = ({ onLoaded }) => {
+const useLoadProducts = ({ onLoad }) => {
 	const [products, setProducts] = useState([]);
 	useEffect(() => {
 		async function fetchData() {
@@ -13,7 +13,7 @@ const useLoadProducts = ({ onLoaded }) => {
 					id: idx,
 				}));
 				setProducts(products);
-				onLoaded(products);
+				onLoad(products);
 			} catch (err) {
 				console.error(err);
 			}
@@ -42,7 +42,7 @@ const getFilteredProducts = ({ products, searchValue, productType }) => {
 
 function ProductsState({ children }) {
 	const [filteredProducts, setFilteredProducts] = useState([]);
-	const products = useLoadProducts({ onLoaded: setFilteredProducts });
+	const products = useLoadProducts({ onLoad: setFilteredProducts });
 	const filterProducts = ({ searchValue, productType }) => {
 		const filteredProducts = getFilteredProducts({
 			products,
