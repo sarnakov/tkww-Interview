@@ -14,12 +14,8 @@ const useLoadProducts = () => {
 	return products;
 };
 
-function App() {
-	const products = useLoadProducts();
-	const [searchInput, setSearchInput] = useState('');
-	const [searchProduct, setProductInput] = useState('');
-
-	const filteredProducts = products.filter((product) => {
+const useFilteredProducts = ({ products, searchInput, searchProduct }) => {
+	return products.filter((product) => {
 		// Refactored pushing components to array
 		if (!searchProduct && !searchInput) return true;
 		const hasTypeMatch = searchProduct && product.type.match(searchProduct);
@@ -31,6 +27,17 @@ function App() {
 		const searchInputRegExp = RegExp(searchInput, 'gi');
 		const isFoundByName = product.name.match(searchInputRegExp);
 		return hasTypeMatch && isFoundByName;
+	});
+};
+
+function App() {
+	const products = useLoadProducts();
+	const [searchInput, setSearchInput] = useState('');
+	const [searchProduct, setProductInput] = useState('');
+	const filteredProducts = useFilteredProducts({
+		products,
+		searchInput,
+		searchProduct,
 	});
 
 	return (
