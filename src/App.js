@@ -3,6 +3,7 @@ import API from './api';
 import ProductCard from './components/Products/ProductCard';
 import Jumbotron from './components/UI/Jumbotron';
 import Footer from './components/UI/Footer';
+import Select from './components/UI/Select';
 
 const useLoadProducts = () => {
 	const [products, setProducts] = useState([]);
@@ -59,10 +60,15 @@ function App() {
 			</div>
 
 			<label for="type">Choose a product type:</label>
-			<select onChange={(e) => setProductType(e.target.value)}>
-				<option value="RETAIL">Retail</option>
-				<option value="CASH">Cash</option>
-			</select>
+			<Select
+				value={productType}
+				options={[
+					{ key: '', value: 'All types' },
+					{ key: 'RETAIL', value: 'Retail' },
+					{ key: 'CASH', value: 'Cash' },
+				]}
+				onChange={setProductType}
+			/>
 
 			<div className="container">
 				<h1>Results: </h1>
