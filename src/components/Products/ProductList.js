@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import ProductsContext from '../../context/Products/ProductsContext';
 import ProductCard from './ProductCard';
 
-function ProductList(props) {
+function ProductList() {
 	const { products } = useContext(ProductsContext);
 	return (
 		<>
