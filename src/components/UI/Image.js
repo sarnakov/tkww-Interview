@@ -1,6 +1,7 @@
 import React from 'react';
 
 function Image(props) {
+	// Would be good to add suspence and fallback
 	return (
 		<img
 			className={props.className}
