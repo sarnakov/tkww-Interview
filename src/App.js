@@ -16,17 +16,16 @@ const useLoadProducts = () => {
 
 const useFilteredProducts = ({ products, searchInput, productType }) => {
 	return products.filter((product) => {
-		// Refactored pushing components to array
+		// Removed pushing components to array with purpose to filter products
+		// Fixed bug when filter by name and type simultaneously
 		if (!productType && !searchInput) return true;
 		const hasTypeMatch = productType && product.type.match(productType);
 
 		if (!searchInput && hasTypeMatch) return true;
 
-		// Fixed bug when filter by name and type simultaneously
 		const searchInputRegExp = RegExp(searchInput, 'gi');
 		const isFoundByName = product.name.match(searchInputRegExp);
 		// I`would also recommend to use full-text search library to improve usability
-
 		return hasTypeMatch && isFoundByName;
 	});
 };
