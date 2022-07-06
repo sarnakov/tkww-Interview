@@ -14,18 +14,19 @@ const useLoadProducts = () => {
 	return products;
 };
 
-const useFilteredProducts = ({ products, searchInput, searchProduct }) => {
+const useFilteredProducts = ({ products, searchInput, productType }) => {
 	return products.filter((product) => {
 		// Refactored pushing components to array
-		if (!searchProduct && !searchInput) return true;
-		const hasTypeMatch = searchProduct && product.type.match(searchProduct);
-		// I`would also recommend to use full-text search library to improve usability
+		if (!productType && !searchInput) return true;
+		const hasTypeMatch = productType && product.type.match(productType);
 
 		if (!searchInput && hasTypeMatch) return true;
 
 		// Fixed bug when filter by name and type simultaneously
 		const searchInputRegExp = RegExp(searchInput, 'gi');
 		const isFoundByName = product.name.match(searchInputRegExp);
+		// I`would also recommend to use full-text search library to improve usability
+
 		return hasTypeMatch && isFoundByName;
 	});
 };
@@ -33,11 +34,11 @@ const useFilteredProducts = ({ products, searchInput, searchProduct }) => {
 function App() {
 	const products = useLoadProducts();
 	const [searchInput, setSearchInput] = useState('');
-	const [searchProduct, setProductInput] = useState('');
+	const [productType, setProductType] = useState('');
 	const filteredProducts = useFilteredProducts({
 		products,
 		searchInput,
-		searchProduct,
+		productType,
 	});
 
 	return (
@@ -59,7 +60,7 @@ function App() {
 			</div>
 
 			<label for="type">Choose a product type:</label>
-			<select onChange={(e) => setProductInput(e.target.value)}>
+			<select onChange={(e) => setProductType(e.target.value)}>
 				<option value="RETAIL">Retail</option>
 				<option value="CASH">Cash</option>
 			</select>
