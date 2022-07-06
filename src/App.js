@@ -13,20 +13,19 @@ function App() {
 		});
 	}, []);
 
-	const cardResults = [];
+	const filteredProducts = products.filter((product) => {
+		// Refactored pushing components to array
+		if (!searchProduct && !searchInput) return true;
+		const hasTypeMatch = searchProduct && product.type.match(searchProduct);
+		// I`would also recommend to use full-text search library to improve usability
 
-	for (let i = 0; i < products.length; i++) {
-		if (searchProduct || searchInput) {
-			if (searchProduct && products[i].type.match(searchProduct)) {
-				cardResults.push(<ProductCard key={i} {...products[i]} />);
-			}
-			if (searchInput && products[i].name.match(searchInput)) {
-				cardResults.push(<ProductCard key={i} {...products[i]} />);
-			}
-		} else {
-			cardResults.push(<ProductCard key={i} {...products[i]} />);
-		}
-	}
+		if (!searchInput && hasTypeMatch) return true;
+
+		// Fixed bug when filter by name and type simultaneously
+		const searchInputRegExp = RegExp(searchInput, 'gi');
+		const isFoundByName = product.name.match(searchInputRegExp);
+		return hasTypeMatch && isFoundByName;
+	});
 
 	return (
 		<>
@@ -55,7 +54,11 @@ function App() {
 			</select>
 			<div className="container">
 				<h1>Results: </h1>
-				<div>{cardResults}</div>
+				<div>
+					{filteredProducts.map((product, idx) => (
+						<ProductCard key={idx} {...product} />
+					))}
+				</div>
 			</div>
 			<div style={{ marginTop: 30 }} className="footer">
 				{' '}
