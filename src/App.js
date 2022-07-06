@@ -18,13 +18,13 @@ function App() {
 	for (let i = 0; i < products.length; i++) {
 		if (searchProduct || searchInput) {
 			if (searchProduct && products[i].type.match(searchProduct)) {
-				cardResults.push(<ProductCard cardResults={products[i]} />);
+				cardResults.push(<ProductCard key={i} {...products[i]} />);
 			}
 			if (searchInput && products[i].name.match(searchInput)) {
-				cardResults.push(<ProductCard cardResults={products[i]} />);
+				cardResults.push(<ProductCard key={i} {...products[i]} />);
 			}
 		} else {
-			cardResults.push(<ProductCard cardResults={products[i]} />);
+			cardResults.push(<ProductCard key={i} {...products[i]} />);
 		}
 	}
 
