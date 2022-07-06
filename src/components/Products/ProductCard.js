@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
 import './ProductCard.css';
+import Image from '../UI/Image';
+
+function ExpandedInformation({ price, storeName }) {
+	return (
+		<div>
+			<p>Price: {price}</p>
+			<p>{storeName}</p>
+		</div>
+	);
+}
 
 function ProductCard(props) {
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -9,13 +19,12 @@ function ProductCard(props) {
 	return (
 		<div className="product-card" onClick={toggleExpandedStatus}>
 			{isExpanded && (
-				<div>
-					<p>Price: {price}</p>
-					<p>{storeName}</p>
-				</div>
+				<ExpandedInformation price={price} storeName={storeName} />
 			)}
 			<h2>{name}</h2>
-			<img alt="alt" src={image} className="product-card__image" />
+			{image && (
+				<Image alt={name} src={image} className="product-card__image" />
+			)}
 			<p>{type}</p>
 			<p>{brandName}</p>
 		</div>
